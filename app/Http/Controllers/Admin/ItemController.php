@@ -32,11 +32,11 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $items = Item::create($request->all());
-        $items->save();
+        dd($request);
+        // $items = Item::create($request->all());
+        // $items->save();
 
-        return redirect()->route('backend.items.index');
+        // return redirect()->route('backend.items.index');
     }
 
     /**
