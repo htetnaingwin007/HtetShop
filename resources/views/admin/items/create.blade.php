@@ -24,49 +24,71 @@
                     @csrf
                     <div class="mb-3">
                         <label for="codeno" class="form-label">Code NO</label>
-                        <input type="text" class="form-control" id="codeno" name="code_no">
+                        <input type="text" class="form-control @error('code_no') is-invalid @enderror" id="codeno" name="code_no">
+                        @error('code_no')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                        @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="image" aria-label="Upload" name="image">
-                        
+                        <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="image" aria-label="Upload" name="image">
+                        @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" id="price" name="price">
+                        <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price">
+                        @error('price')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="discount" class="form-label">Discount</label>
-                        <input type="text" class="form-control" id="discount" name="discount">
+                        <input type="text" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount">
+                        @error('discount')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="in_stock" class="form-label">Instock</label>
-                        <select class="form-select" id="in_stock" name="in_stock">
+                        <select class="form-select @error('in_stock') is-invalid @enderror" id="in_stock" name="in_stock">
                             <option value="1" selected>Yes</option>
                             <option value="2">No</option>
                         </select>
-
+                        @error('in_stock')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="category" class="form-label">Category</label>
-                        <select class="form-select" id="category" name="category_id">
+                        <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
                             <option value="" selected>Choose Category</option>
                             @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
-
+                        @error('category_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <div class="">
                             <label for="description" class="form-label">Descriptions</label>
-                            <textarea class="form-control" id="description" style="height: 100px" name="description"></textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" style="height: 100px" name="description"></textarea>
                         </div>
+                        @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>  
+
                     <div class="mb-3 row mx-1">
                         <button class="btn btn-lg btn-primary">Save</button>
                     </div>

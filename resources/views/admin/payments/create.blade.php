@@ -25,15 +25,24 @@
                     
                     <div class="mb-3">
                         <label for="id" class="form-label">Id</label>
-                        <input type="number" class="form-control" id="id" name="id">
+                        <input type="number" class="form-control @error('id') is-invalid @enderror" id="id" name="id">
+                        @error('id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Logo</label>
-                        <input type="file" class="form-control" id="image" aria-label="Upload" name="logo">
+                        <input type="file" class="form-control @error('logo') is-invalid @enderror" id="image" aria-label="Upload" name="logo">
+                        @error('logo')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 row mx-1">
                         <button class="btn btn-lg btn-primary">Save</button>
