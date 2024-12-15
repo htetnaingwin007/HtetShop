@@ -25,14 +25,14 @@
                     
                     <div class="mb-3">
                         <label for="id" class="form-label">Id</label>
-                        <input type="number" class="form-control @error('id') is-invalid @enderror" id="id" name="id">
+                        <input type="number" class="form-control @error('id') is-invalid @enderror" id="id" name="id" value="{{old('id')}}">
                         @error('id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name')}}">
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

@@ -2,9 +2,9 @@
 @section('content')
 <div class="container-fluid px-4">
         <div class="my-3">
-            <h1 class="mt-4 d-inline">Items</h1>
-            <a href="" class="btn btn-primary float-end">
-                Create Item
+            <h1 class="mt-4 d-inline">Edit Items</h1>
+            <a href="{{route('backend.items.index')}}" class="btn btn-danger float-end">
+                Cancel
             </a>
 
         </div>
@@ -12,26 +12,26 @@
             <li class="breadcrumb-item"><a href="{{route('backend.dashboard')}}">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="{{route('backend.items.index')}}">Items</a></li>
             
-            <li class="breadcrumb-item active">Create items</li>
+            <li class="breadcrumb-item active">Edit items</li>
         </ol>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Post Lists
+                Edit Item
             </div>
             <div class="card-body">
                 <form action="{{route('backend.items.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="codeno" class="form-label">Code NO</label>
-                        <input type="text" class="form-control @error('code_no') is-invalid @enderror" id="codeno" name="code_no" value="{{old('code_no')}}">
+                        <input type="text" class="form-control @error('code_no') is-invalid @enderror" id="codeno" name="code_no" value="{{$item->code_no}}">
                         @error('code_no')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name')}}">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{$item->name}}">
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -45,14 +45,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{old('price')}}">
+                        <input type="text" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{$item->price}}">
                         @error('price')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="discount" class="form-label">Discount</label>
-                        <input type="text" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" value="{{old('discount')}}">
+                        <input type="text" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" value="{{$item->discount}}">
                         @error('discount')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -60,8 +60,8 @@
                     <div class="mb-3">
                         <label for="in_stock" class="form-label">Instock</label>
                         <select class="form-select @error('in_stock') is-invalid @enderror" id="in_stock" name="in_stock" value="{{old('in_stock')}}">
-                            <option value="1" selected>Yes</option>
-                            <option value="2">No</option>
+                            <option value="1" {{$item->in_stock == 1 ? 'selected':''}}>Yes</option>
+                            <option value="2" {{$item->in_stock == 0 ? 'selected':''}}>No</option>
                         </select>
                         @error('in_stock')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -72,7 +72,7 @@
                         <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
                             <option value="" selected>Choose Category</option>
                             @foreach($categories as $category)
-                            <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected':''}}>{{$category->name}}</option>
+                            <option value="{{$category->id}}" {{$item->category_id == $category->id ? 'selected':''}}>{{$category->name}}</option>
                             @endforeach
                         </select>
                         @error('category_id')
@@ -82,7 +82,7 @@
                     <div class="mb-3">
                         <div class="">
                             <label for="description" class="form-label">Descriptions</label>
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" style="height: 100px" name="description">{{old('description')}}</textarea>
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" style="height: 100px" name="description">{{$item->description}}</textarea>
                         </div>
                         @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>

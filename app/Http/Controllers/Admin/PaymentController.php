@@ -59,7 +59,9 @@ class PaymentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $payment = Payment::find($id);
+        
+        return view('admin.payments.edit',compact('payment'));
     }
 
     /**
@@ -75,6 +77,10 @@ class PaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // echo "<h1>$id</h1>";
+        $payment = Payment::find($id);
+        $payment->delete();
+
+        return redirect()->route('backend.payments.index');
     }
 }
