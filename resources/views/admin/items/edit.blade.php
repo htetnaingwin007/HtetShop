@@ -20,8 +20,9 @@
                 Edit Item
             </div>
             <div class="card-body">
-                <form action="{{route('backend.items.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('backend.items.update',$item->id)}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="mb-3">
                         <label for="codeno" class="form-label">Code NO</label>
                         <input type="text" class="form-control @error('code_no') is-invalid @enderror" id="codeno" name="code_no" value="{{$item->code_no}}">
@@ -37,8 +38,26 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
-                        <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="image" aria-label="Upload" name="image" value="{{old('image')}}">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane" type="button" role="tab" aria-controls="image-tab-pane" aria-selected="true">Image</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="new_image-tab" data-bs-toggle="tab" data-bs-target="#new_image-tab-pane" type="button" role="tab" aria-controls="new_image-tab-pane" aria-selected="false">New Image</button>
+                            </li>
+                            
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="image-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
+                                <img src="{{$item->image}}" alt="" class="w-25 h-25 m-2">
+                                <input type="hidden" name="old_image" id="" value="{{$item->image}}">
+                            </div>
+                            <div class="tab-pane fade" id="new_image-tab-pane" role="tabpanel" aria-labelledby="new_image-tab" tabindex="0">
+                                <input type="file" accept="image/*" class="m-2 form-control @error('image') is-invalid @enderror" id="image" aria-label="Upload" name="image" value="{{old('image')}}">
+                            </div>
+                            
+                        </div>
+                        
                         @error('image')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -61,7 +80,7 @@
                         <label for="in_stock" class="form-label">Instock</label>
                         <select class="form-select @error('in_stock') is-invalid @enderror" id="in_stock" name="in_stock" value="{{old('in_stock')}}">
                             <option value="1" {{$item->in_stock == 1 ? 'selected':''}}>Yes</option>
-                            <option value="2" {{$item->in_stock == 0 ? 'selected':''}}>No</option>
+                            <option value="0" {{$item->in_stock == 0 ? 'selected':''}}>No</option>
                         </select>
                         @error('in_stock')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -90,7 +109,7 @@
                     </div>  
 
                     <div class="mb-3 row mx-1">
-                        <button class="btn btn-lg btn-primary">Save</button>
+                        <button class="btn btn-lg btn-warning">Update</button>
                     </div>
                     </form>
             </div>
