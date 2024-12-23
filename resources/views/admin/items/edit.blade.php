@@ -78,7 +78,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="in_stock" class="form-label">Instock</label>
-                        <select class="form-select @error('in_stock') is-invalid @enderror" id="in_stock" name="in_stock" value="{{old('in_stock')}}">
+                        <select class="form-select @error('in_stock') is-invalid @enderror" id="in_stock" name="in_stock">
                             <option value="1" {{$item->in_stock == 1 ? 'selected':''}}>Yes</option>
                             <option value="0" {{$item->in_stock == 0 ? 'selected':''}}>No</option>
                         </select>
