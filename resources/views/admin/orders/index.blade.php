@@ -2,14 +2,22 @@
 @section('content')
     <div class="container-fluid px-4">
         <div class="my-3">
-            <h1 class="mt-4 d-inline">Order</h1>
+            <h1 class="mt-4 d-inline">
+                @if(Request::is('backend/orderAccept'))
+                    Order Accept
+                @elseif(Request::is('backend/orderComplete'))
+                    Order Complete
+                @else
+                    Order List
+                @endif
+            </h1>
             <a href="{{route('backend.orderComplete')}}" class="btn btn-secondary mx-2 float-end" >
                 Order Complete List
             </a>
-            <a href="{{route('backend.orderAccept')}}" class="btn btn-success mx-2 float-end" >
+            <a href="{{route('backend.orderAccept')}}" class="btn btn-primary mx-2 float-end" >
                 Order Accept List
             </a>
-            <a href="{{route('backend.orders')}}" class="btn btn-primary mx-2 float-end" >
+            <a href="{{route('backend.orders')}}" class="btn btn-success mx-2 float-end" >
                 Order  list
             </a>
 
@@ -47,17 +55,30 @@
                             $i = 1;
                         @endphp
                         @foreach($order_data as $order)
+                            @if($order != null)
                             <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$order->voucher_no}}</td>
                                 <td>{{$order->user->name}}</td>
-                                <td>{{$order->status}}</td>
+                                <td>
+                                   <span class="badge
+                                    @if($order->status == 'Pending')
+                                        {{'text-bg-secondary'}}
+                                    @elseif($order->status == 'Accept')
+                                        {{'text-bg-primary'}}
+                                    @else
+                                        {{'text-bg-success'}}
+                                    @endif
+                                   ">
+                                    {{$order->status}}
+                                   </span>
+                                </td>
                                 <td><img src="{{$order->payment->logo}}" alt="" with="40" height="40"></td>
                                 <td>
-                                    <button class="btn btn-primary">Detail</button>
+                                    <a class="btn btn-sm btn-info" href="{{route('backend.orders.detail',$order->voucher_no)}}">Detail</a>
                                 </td>
                             </tr>
-
+                            @endif
                         @endforeach
                     </tbody>
                     

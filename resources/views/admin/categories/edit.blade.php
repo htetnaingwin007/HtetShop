@@ -5,7 +5,7 @@
             <h1 class="mt-4 d-inline">
                 Edit Categories
             </h1>
-            <a href="" class="btn btn-danger float-end">
+            <a href="{{route('backend.categories.index')}}" class="btn btn-danger float-end">
                 Cancel
             </a>
 

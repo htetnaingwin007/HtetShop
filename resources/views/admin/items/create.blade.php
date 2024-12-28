@@ -3,8 +3,8 @@
 <div class="container-fluid px-4">
         <div class="my-3">
             <h1 class="mt-4 d-inline">Items</h1>
-            <a href="" class="btn btn-primary float-end">
-                Create Item
+            <a href="{{route('backend.items.index')}}" class="btn btn-danger float-end">
+                Cancel
             </a>
 
         </div>

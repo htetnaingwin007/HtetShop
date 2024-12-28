@@ -74,7 +74,7 @@ class PaymentController extends Controller
         // dd($request);
         $payment = Payment::find($id);
         $payment->update($request->all());
-
+        // dd($request);
         if($request->hasFile('logo')){
             $file_name = time().'.'.$request->logo->extension();
 
@@ -83,7 +83,7 @@ class PaymentController extends Controller
                 $payment->logo = "/images/payments/".$file_name;
             }
         }else{
-            $paymemt->logo = $request->old_image;
+            $payment->logo = $request->old_image;
         }
 
         $payment->save();
